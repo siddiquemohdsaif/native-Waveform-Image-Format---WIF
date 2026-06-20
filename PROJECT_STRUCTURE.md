@@ -32,6 +32,7 @@ native-Waveform-Image-Format---WIF/
     specs/
     diagrams/
   tools/
+  build/
 ```
 
 ## Source Code
@@ -75,3 +76,8 @@ native-Waveform-Image-Format---WIF/
 ## Tooling Paths
 
 - `tools/`: scripts for inspection, benchmarking, conversion, and debug export.
+
+## Build Paths
+
+- `build/`: native C build output directory. Generated contents are ignored by
+  Git, except for `build/.gitkeep` so the folder exists in the repository.
