@@ -8,11 +8,9 @@ native-Waveform-Image-Format---WIF/
   PROJECT_STRUCTURE.md
   src/
     wif/
-      core/
       encoders/
       evaluators/
       format/
-      image/
       pipeline/
       utils/
     cli/
@@ -37,17 +35,20 @@ native-Waveform-Image-Format---WIF/
 
 ## Source Code
 
-- `src/wif/core/`: shared block, plane, and binary data structures.
-- `src/wif/image/`: image loading, PNG decoding, and RGB-to-YUV444 conversion.
 - `src/wif/evaluators/`: `EyeEntropyEvaluator` and future block-quality
-  decision logic.
+  decision logic. It routes 16x16 raw plane blocks into DTC and wave planes
+  using edge strength.
 - `src/wif/encoders/`: `WaveEncoder`, `LineEncoder`, and `dtcEncoder`
   implementations.
 - `src/wif/format/`: WIF container layout, headers, metadata, and binary merge
   logic.
 - `src/wif/pipeline/`: full image-to-WIF encode/decode orchestration.
-- `src/wif/utils/`: small reusable helpers.
-- `src/cli/`: command-line entry points.
+- `src/wif/utils/`: small reusable helpers, including image preprocessing to
+  YUV444 plane buffers, grayscale debug PNGs, final split-stream RLE+rANS
+  route-map compaction, plane reconstruction from compact DTC/Wave planes, and
+  YCbCr-to-color PNG export.
+- `src/cli/`: command-line entry points, including image preprocessing and raw
+  plane evaluation.
 
 ## Input Paths
 
@@ -58,8 +59,9 @@ native-Waveform-Image-Format---WIF/
 ## Output Paths
 
 - `data/output/wif/`: final encoded `.wif` image binaries.
-- `data/output/debug/`: intermediate debug artifacts such as generated
-  `dtc-blocks-plane` and `wave-blocks-plane` images.
+- `data/output/debug/`: intermediate debug artifacts such as generated edge
+  maps, compact DTC/Wave block planes, routing bitmaps, and full-size routing
+  overlays.
 - `data/output/decoded/`: decoded images produced while testing the decoder.
 
 ## Test Paths
@@ -79,5 +81,4 @@ native-Waveform-Image-Format---WIF/
 
 ## Build Paths
 
-- `build/`: native C build output directory. Generated contents are ignored by
-  Git, except for `build/.gitkeep` so the folder exists in the repository.
+- `build/`: native C build output directory. This folder is ignored by Git.
