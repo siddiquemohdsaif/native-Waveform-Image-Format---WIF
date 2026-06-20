@@ -1,24 +1,2 @@
-# Build output
-build/*
-!build/.gitkeep
-
-# Project data
 data/
-
-# Native C artifacts
-*.o
-*.obj
-*.a
-*.lib
-*.so
-*.dll
-*.dylib
-*.exe
-*.pdb
-
-# Local files
-*.log
-*.tmp
-.env
-.DS_Store
-Thumbs.db
+build/
