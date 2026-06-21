@@ -41,11 +41,38 @@ add_executable(wif-ycbcr-to-png
 
 target_include_directories(wif-ycbcr-to-png PRIVATE src)
 
+add_executable(wif-line-encoder
+    "src/wif/encoders/line encoder/line_encoder.c"
+)
+
+target_include_directories(wif-line-encoder PRIVATE src)
+
+add_executable(wif-lines-binary-encoder-rans
+    "src/wif/encoders/line encoder/lines_binary_encoder_rans.c"
+)
+
+target_include_directories(wif-lines-binary-encoder-rans PRIVATE src)
+
+add_executable(wif-lines-binary-decoder-rans
+    "src/wif/encoders/line encoder/lines_binary_decoder_rans.c"
+)
+
+target_include_directories(wif-lines-binary-decoder-rans PRIVATE src)
+
+add_executable(wif-line-encode-plane
+    src/cli/line_encode_plane.c
+)
+
+target_include_directories(wif-line-encode-plane PRIVATE src)
+
 if(WIN32)
     target_link_libraries(wif-preprocess PRIVATE ole32 windowscodecs)
     target_link_libraries(wif-evaluate-plane PRIVATE ole32 windowscodecs)
     target_link_libraries(wif-decode-plane PRIVATE ole32 windowscodecs)
     target_link_libraries(wif-ycbcr-to-png PRIVATE ole32 windowscodecs)
+    target_link_libraries(wif-line-encoder PRIVATE ole32 windowscodecs)
+    target_link_libraries(wif-lines-binary-decoder-rans PRIVATE ole32 windowscodecs)
+    target_link_libraries(wif-line-encode-plane PRIVATE ole32 windowscodecs)
 else()
     message(FATAL_ERROR "WIF debug PNG tools currently use Windows Imaging Component and must be built on Windows.")
 endif()
