@@ -65,6 +65,12 @@ add_executable(wif-line-encode-plane
 
 target_include_directories(wif-line-encode-plane PRIVATE src)
 
+add_executable(wif-wave-block-analyser
+    src/cli/wave_block_analyser.c
+)
+
+target_include_directories(wif-wave-block-analyser PRIVATE src)
+
 if(WIN32)
     target_link_libraries(wif-preprocess PRIVATE ole32 windowscodecs)
     target_link_libraries(wif-evaluate-plane PRIVATE ole32 windowscodecs)
@@ -73,6 +79,7 @@ if(WIN32)
     target_link_libraries(wif-line-encoder PRIVATE ole32 windowscodecs)
     target_link_libraries(wif-lines-binary-decoder-rans PRIVATE ole32 windowscodecs)
     target_link_libraries(wif-line-encode-plane PRIVATE ole32 windowscodecs)
+    target_link_libraries(wif-wave-block-analyser PRIVATE ole32 windowscodecs)
 else()
     message(FATAL_ERROR "WIF debug PNG tools currently use Windows Imaging Component and must be built on Windows.")
 endif()
